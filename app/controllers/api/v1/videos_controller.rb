@@ -49,8 +49,8 @@ class Api::V1::VideosController < Api::V1::ApiController
 
     message = @client.messages.create(
                                  body: 'Hi there, your video link is:' + @video.video ,
-                                 from: '+13192552282',
+                                 from: ENV['DEFAULT_NUMBER'],
                                  to:   @video.number
-                               )
+                               )                           
   end
 end
