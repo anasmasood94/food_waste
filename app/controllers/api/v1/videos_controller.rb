@@ -3,11 +3,13 @@ class Api::V1::VideosController < Api::V1::ApiController
   def create
     video = Video.new create_params
     if video.save
+      VideoNotifierMailer.send_video_email(video).deliver_now
       render json: { success: true }.to_json, status: 200
     else
       render json: { success: false, message: video.errors.full_messages.frist }.to_json, status: 422
     end
   end
+  
 
   private
 
@@ -32,4 +34,5 @@ class Api::V1::VideosController < Api::V1::ApiController
     region: ENV['AWS_REGION']).bucket(ENV['AWS_BUCKET']
                                       ).object(get_object_key)
   end
+
 end
