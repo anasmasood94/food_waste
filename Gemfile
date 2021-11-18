@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'random-location'
 gem 'aws-sdk-s3'
+gem 'twilio-ruby'
 
 gem 'geocoder'
 gem 'devise'
