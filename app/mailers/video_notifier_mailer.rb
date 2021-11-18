@@ -1,5 +1,5 @@
 class VideoNotifierMailer < ApplicationMailer
-    default from: 'info@a1genius.com'
+    default from: 'admin@foodwaste.aimfit.io'
     
     def send_video_email(video)
       @video = video
