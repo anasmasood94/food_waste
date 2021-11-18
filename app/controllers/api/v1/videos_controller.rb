@@ -1,9 +1,15 @@
+require 'twilio-ruby'
 class Api::V1::VideosController < Api::V1::ApiController
 
   def create
     video = Video.new create_params
     if video.save
-      VideoNotifierMailer.send_video_email(video).deliver_now
+      if video.email.present?
+        VideoNotifierMailer.send_video_email(video).deliver_now
+      end
+      if video.number.present?
+        send_message(video)
+      end
       render json: { success: true }.to_json, status: 200
     else
       render json: { success: false, message: video.errors.full_messages.frist }.to_json, status: 422
@@ -35,4 +41,16 @@ class Api::V1::VideosController < Api::V1::ApiController
                                       ).object(get_object_key)
   end
 
+  def send_message(video)
+    @video = video
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token  = ENV['TWILIO_AUTH_TOKEN']
+    @client = Twilio::REST::Client.new(account_sid, auth_token)
+
+    message = @client.messages.create(
+                                 body: 'Hi there, your video link is:' + @video.video ,
+                                 from: '+13192552282',
+                                 to:   @video.number
+                               )
+  end
 end
