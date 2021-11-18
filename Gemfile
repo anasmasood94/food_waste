@@ -11,6 +11,7 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'random-location'
+gem 'aws-sdk-s3'
 
 gem 'geocoder'
 gem 'devise'
