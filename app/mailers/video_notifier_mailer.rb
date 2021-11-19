@@ -4,6 +4,6 @@ class VideoNotifierMailer < ApplicationMailer
     def send_video_email(video)
       @video = video
       mail( to: @video.email,
-      subject: 'Here is your video link:' + @video.video )
+      subject: 'Food Waste')
     end
 end

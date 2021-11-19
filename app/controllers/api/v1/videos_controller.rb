@@ -48,9 +48,9 @@ class Api::V1::VideosController < Api::V1::ApiController
     @client = Twilio::REST::Client.new(account_sid, auth_token)
 
     message = @client.messages.create(
-                                 body: 'Hi there, your video link is:' + @video.video ,
-                                 from: '+13192552282',
+                                 body: '#Trendi #FvckFoodWaste' + @video.video ,
+                                 from: ENV['DEFAULT_NUMBER'],
                                  to:   @video.number
-                               )
+                               )                           
   end
 end
