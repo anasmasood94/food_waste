@@ -1,5 +1,5 @@
 class VideoNotifierMailer < ApplicationMailer
-  default from: 'trendi@a1genius.com'
+  default from: 'marketing@trendi.com'
 
   def send_video_email(video)
     @video = video
